@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程序员菜谱平台</title>
+    <style>   
+        /* 字体 */
+        @font-face {
+            font-family: deyi;
+            src: url(./assets/font/SmileySans-Oblique.otf.woff2);
+            font-style: normal;
+            font-weight: normal;
+        }  
+        * {
+            font-family: 'deyi', Courier, monospace;
+        } 
+
+        /* 视口 */
+        body {
+            height: 100vh;
+            background: linear-gradient(to right, #FBED96, #BEECC7);
+        }
+        
+        /* 白框 */
+        .container {
+            margin: auto;
+            margin-top: 80px;
+            width: 940px;
+            height: auto;
+            background-color: white;
+            
+            border-radius: 2em;
+            box-shadow: 1px 2px 2px gray;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        /* 图框 */
+        .welcome {
+            position: relative;
+
+            margin-top: 40px;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 图框文字盒 */
+        .center {
+            position: absolute;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* 图框标题 */
+        .hello {
+            font-size: 60px;
+            color: white;
+            text-shadow: 2px 2px 1px gray;
+        }
+        /* 图框按钮 */
+        a {
+            position: relative;
+            padding: 1.2em 2em;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            color: rgb(68, 67, 67);
+        }
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(to right, #FBED96, #BEECC7);
+            border-radius: 4px;
+            transition: box-shadow .5s ease, transform .2s ease;
+            will-change: transform;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+            transform:
+                translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+        }
+        a:hover::before {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+        }
+        a::after {
+            position: relative;
+            display: inline-block;
+            content: attr(data-title);
+            transition: transform .2s ease;
+            font-weight: bold;
+            letter-spacing: .01em;
+            will-change: transform;
+            transform:
+                translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+        }
+
+        /* 图 */
+        .image {
+            max-width: 100%;
+        }
+
+        /* 图框按钮 */
+        .another {
+            position: absolute;
+            bottom: 2em;
+
+            width: 100%;
+
+            display: flex;
+            justify-content: space-around;
+        }
+        .another div {
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            text-shadow: .5px .5px gray;
+        }
+
+        /* 详情框 */
+        .detail {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 80%;
+            background-color: #ddedae;
+            border-radius: .5em;
+            padding: 20px;
+        }
+        /* 标题 */
+        .title {
+            text-align: center;
+            font-size: 2em;
+            word-break: keep-all;
+        }
+        /* 文本 */
+        .msg {
+            width: 100%;
+            word-break: break-all; /* 强制换行 */
+            line-height: normal;
+            white-space: normal;
+            font-size: 1em;
+            border-radius: .2em;
+            background-color: #c1f6b571;
+        }
+
+        /* 注释 */
+        .power {
+            padding: 5px;
+            text-align: center;
+            font-size: .5em;
+            color: rgb(84, 84, 84);
+        }
+
+        /* 页宽媒体查询 */
+        @media (max-width: 960px) {
+            .container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="welcome">
+            <img class="image" src="./assets/WindowsXP.png" />
+            <div class="center">
+                <div class="hello">你好呀:D 吃啥呀</div>
+                <a href="#" data-title="我吃吃吃吃吃！" onclick="dialog()"></a>
+            </div>
+            <div class="another">
+                <div onclick="to()">—随便放点—</div>
+                <div onclick="remove()">—删除菜谱—</div>
+                <div onclick="update()">—更改菜谱—</div>
+                <div onclick="add()">—贡献菜谱—</div>
+            </div>
+        </div>
+
+        <div class="detail">
+            <div name="title" class="title">夏日下饭菜</div>
+            <div name="msg" class="msg">拍黄瓜里加魔芋爽hhhh</div>
+        </div>
+    </div>
+    <div class="power">2023/6/21&nbsp;&nbsp;&nbsp;&nbsp;一个被蚊子咬了三个包的夏至日XD&nbsp;&nbsp;&nbsp;&nbsp;by Ra-Liz</div>
+
+    <script src="./src/operate.js"></script>
+    <script src="./src/button.js"></script>
+</body>
+
+</html>

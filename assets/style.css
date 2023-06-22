@@ -1,0 +1,121 @@
+a {
+  top: 48%;
+  position: absolute;
+  display: inline-block;
+  padding: 1.2em 2em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  color: rgb(68, 67, 67);
+}
+
+a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(to right, #fbed96, #beecc7);
+  border-radius: 4px;
+  transition: box-shadow 0.5s ease, transform 0.2s ease;
+  will-change: transform;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0))
+    rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+}
+
+a:hover::before {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+a::after {
+  position: relative;
+  display: inline-block;
+  content: attr(data-title);
+  transition: transform 0.2s ease;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  will-change: transform;
+  transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0))
+    rotateY(var(--ry, 0));
+}
+
+.hello {
+  top: 30%;
+
+  position: absolute;
+  font-size: 4rem;
+  color: white;
+
+  text-shadow: 2px 2px 1px gray;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(to right, #fbed96, #beecc7);
+}
+
+.container {
+  margin: auto;
+  margin-top: 80px;
+  width: 80%;
+  height: 110%;
+  background-color: white;
+
+  border-radius: 2em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+.welcome {
+  margin-top: 40px;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+}
+
+.detail {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  background-color: #ddedae;
+  border-radius: 0.5em;
+  padding: 20px;
+}
+.title {
+  text-align: center;
+  font-size: 2rem;
+}
+.msg {
+  width: 100%;
+  word-break: break-all; /* 强制换行 */
+  line-height: normal;
+  white-space: normal;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  background-color: #c1f6b571;
+}
+
+.power {
+  padding: 5px;
+  text-align: center;
+  font-size: 0.5rem;
+  color: rgb(84, 84, 84);
+}
