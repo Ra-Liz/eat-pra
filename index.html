@@ -43,12 +43,33 @@
             transform-style: preserve-3d;
             transform: perspective(1000px);
         }
+
+        /* 图标 */
+        .bread {
+            align-self: end;
+            margin-top: 10px;
+            margin-right: 10px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .bread .icon {
+            width: 30px;
+            cursor: pointer;
+        }
+        .bread .text {
+            color: #FBED96;
+            font-size: 20px;
+            margin-right: 10px;
+        }
         
         /* 图框 */
         .welcome {
             position: relative;
 
-            margin-top: 40px;
+            margin-top: 10px;
             width: 100%;
             height: auto;
             overflow: hidden;
@@ -114,12 +135,12 @@
                 translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
         }
 
-        /* 图 */
+        /* 图片 */
         .image {
             max-width: 100%;
         }
 
-        /* 图框按钮 */
+        /* 按钮 */
         .another {
             position: absolute;
             bottom: 2em;
@@ -181,6 +202,11 @@
 
 <body>
     <div class="container">
+        <div class="bread">
+            <div class="text">夏日下饭菜</div>
+            <img onclick="random()" class="icon" src="./assets/re.png" title="换一换" />
+        </div>
+
         <div class="welcome">
             <img class="image" src="./assets/WindowsXP.png" />
             <div class="center">
@@ -188,7 +214,7 @@
                 <a href="#" data-title="我吃吃吃吃吃！" onclick="dialog()"></a>
             </div>
             <div class="another">
-                <div onclick="to()">—随便放点—</div>
+                <div onclick="to()">—仓库主页—</div>
                 <div onclick="remove()">—删除菜谱—</div>
                 <div onclick="update()">—更改菜谱—</div>
                 <div onclick="add()">—贡献菜谱—</div>

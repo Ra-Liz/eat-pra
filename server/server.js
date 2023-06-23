@@ -68,6 +68,33 @@ const port = 4444
 app.use(cors())
 app.use(bodyParser.json())
 
+let prevIndex = -1
+app.all('/rand', async (req, res) => {
+  try {
+    const database = client.db('accounts')
+    const coll = database.collection('account')
+
+    // 随机索引
+    const count = await coll.countDocuments()
+    const randomIndex = Math.floor(Math.random() * count)
+    while(randomIndex === prevIndex) {
+      randomIndex = Math.floor(Math.random() * count)
+    }
+    prevIndex = randomIndex
+
+    const data = await coll.findOne({}, { skip: randomIndex })
+
+    if (data) {
+      res.json(data)
+    } else {
+      res.json(null)
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Internal Server Error')
+  }
+})
+
 app.all("/eat", async (req, res) => {
   try {
     const param = req.query.param // 获取前端发送的参数

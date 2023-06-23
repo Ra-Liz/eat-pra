@@ -2,6 +2,45 @@ function to() {
   window.open("https://github.com/Ra-Liz");
 }
 
+// 随机抽取一个菜名-我认为需要节流！
+const random = throttled(rand, 1500)
+function throttled(func, delay) {
+  let timer = null
+  return function() {
+      let context = this
+      let args = arguments
+      if (!timer) {
+          timer = setTimeout(function() {
+              func.apply(context, args)
+              timer = null
+          }, delay)
+      }
+  }
+}
+function rand() {
+  fetch('http://localhost:4444/rand')
+    .then((response) => response.json())
+    .then((data) => {
+      const { name, msg } = data
+      console.log(name, msg)
+
+      const bread = document.querySelector(".text")
+      bread.innerHTML = `
+      <div class="text">${name}</div>
+      `
+
+      const detailDiv = document.querySelector(".detail")
+      detailDiv.innerHTML = `
+        <h1 name="title" class="title">${data.name}</h1>
+        <div name="msg" class="msg">${data.msg}</div>
+      `;
+    })
+    .catch((error) => {
+      console.log(error)
+      alert('请求出错！')
+    });
+}
+
 // 对话框查找菜谱
 function dialog() {
   let msg = prompt("请输入菜名", "");
@@ -19,7 +58,7 @@ function search(msg) {
         detailDiv.innerHTML = `
                       <h1 name="title" class="title">${data.name}</h1>
                       <div name="msg" class="msg">${data.msg}</div>
-                  `;
+        `;
       } else {
         alert("暂时没有这道菜的做法，铁铁可以贡献菜谱哦~");
       }
